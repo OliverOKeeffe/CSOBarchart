@@ -1,12 +1,12 @@
 class BarChart {
-	constructor(data, chartWidth, chartHeight, x, y, barWidth) {
-		this.data = data;
-		this.x = x;
-		this.y = y;
-		this.chartWidth = chartWidth;
-		this.chartHeight = chartHeight;
-		this.barWidth = barWidth;
-		this.numBars = data.length;
+	constructor(obj) {
+		this.data = obj.data;
+		this.x = obj.x;
+		this.y = obj.y;
+		this.chartWidth = obj.chartWidth;
+		this.chartHeight = obj.chartHeight;
+		this.barWidth = obj.barWidth;
+		this.numBars = this.data.length;
 	}
 
 	render() {
