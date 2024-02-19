@@ -11,21 +11,10 @@ let axisColour = "#474747";
 let axisThickness = 3;
 let barColour = "#416096";
 
-// function preload() {
-// 	data = loadTable("data/CJA01.20240219T170251.csv", "csv", "header");
-// }
-// console.log(data)
-
 function preload() {
-    // Load CSV file with callback function onDataLoaded
-    data = loadTable("data/CJA01.20240219T170251.csv", "csv", "header", onDataLoaded);
+	data = loadTable("data/CJA01.20240219T170251.csv", "csv", "header");
 }
-
-function onDataLoaded(table) {
-    // Callback function to handle loaded data
-    data = table; // Assign loaded data to global variable
-    console.log(data); // Log loaded data
-}
+console.log(data)
 
 function setup() {
 	createCanvas(canvasWidth, canvasHeight);
