@@ -12,7 +12,7 @@ class BarChart{
         this.labelColour = obj.labelColour;
         this.labelRotation = obj.labelRotation;
         this.barWidth = obj.barWidth;
-        this.barolour = obj.barColour;
+        this.barColour = obj.barColour;
     }
 
     render(){
