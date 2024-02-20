@@ -5,7 +5,7 @@ let numRows;
 
 function preload() {
   data = loadTable("data/Combined.csv", "csv", "header");
-  console.log(data);
+  // console.log(data);
 }
 
 function setup() {
@@ -18,7 +18,7 @@ function setup() {
   for (let i = 0; i < numRows; i++) {
     cleanData.push(data.rows[i].obj);
   }
-  console.log(cleanData);
+  // console.log(cleanData);
 
   let barChart01 = {
     data: cleanData,

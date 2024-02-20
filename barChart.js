@@ -59,9 +59,9 @@ class BarChart{
         let tickGap = this.chartHeight / 5;
         let tickValue = max(this.data.map(d=> d[this.yValue]))/5
         for(let i=0; i<=5; i++){
-            stroke("fff")              
+            noStroke()            
             line(0,-i*tickGap,-20,-i*tickGap);
-            fill ("#cf291d")
+            fill (this.labelColour)
             textSize(this.lableTextSize)
             textAlign(RIGHT, CENTER)
             text(tickValue*i,-20,-i*tickGap)
