@@ -10,7 +10,7 @@ function preload() {
 
 function setup() {
   background(50);
-  createCanvas(500, 500);
+  createCanvas(800, 800);
 
   noLoop();
 
@@ -22,7 +22,7 @@ function setup() {
 
   let barChart01 = {
     data: cleanData,
-    yValue: "Value",
+    yValue: "VALUE",
     xValue: "Year",
     chartWidth: 200,
     chartHeight: 200,

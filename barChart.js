@@ -2,6 +2,7 @@ class BarChart{
     constructor(obj){
         this.data = obj.data;
         this.yValue = obj.yValue;
+        this.xValue = obj.xValue;
         this.chartWidth=obj.chartWidth;
         this.chartHeight=obj.chartHeight;
         this.xPos = obj.xPos;
@@ -23,7 +24,7 @@ class BarChart{
         line (0,0,this.chartWidth,0);
 
         let gap = (this.chartWidth - (this.data.length * this.barWidth)) / (this.data.length + 1)
-        let lables = this.data.map(d => d.Age_Group);
+        let lables = this.data.map(d => d[this.xValue]);
         let scale = this.chartHeight/ max(this.data.map(d => d[this.yValue]));
         console.log(scale)
       
