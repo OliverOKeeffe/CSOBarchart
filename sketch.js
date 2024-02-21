@@ -4,7 +4,7 @@ let cleanData = [];
 let numRows;
 
 function preload() {
-  data = loadTable("data/Arson.csv", "csv", "header");
+  data = loadTable("data/Reoffending.csv", "csv", "header");
 }
 
 function setup() {
@@ -25,7 +25,7 @@ function setup() {
     // w: 250,
     // h: 250,
     data: cleanData,
-    yValue: "VALUE",
+    yValue: "Total",
     xValue: "Year",
     chartWidth: 300,
     chartHeight: 280,
@@ -55,8 +55,9 @@ function setup() {
     // w: 250,
     // h: 250,
     data: cleanData,
-    yValue: "VALUE",
+    yValue: "Total",
     xValue: "Year",
+    // yValues:,
     chartWidth: 300,
     chartHeight: 280,
     xPos: 600,
