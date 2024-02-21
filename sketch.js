@@ -4,13 +4,12 @@ let cleanData = [];
 let numRows;
 
 function preload() {
-  data = loadTable("data/Combined.csv", "csv", "header");
-  // console.log(data);
+  data = loadTable("data/Arson.csv", "csv", "header");
 }
 
 function setup() {
   background(50);
-  createCanvas(800, 800);
+  createCanvas(1000, 800);
 
   noLoop();
 
@@ -18,19 +17,19 @@ function setup() {
   for (let i = 0; i < numRows; i++) {
     cleanData.push(data.rows[i].obj);
   }
-  // console.log(cleanData);
+
 
   let barChart01 = {
-    x: 70,
-    y: 350,
-    w: 250,
-    h: 250,
+    // x: 70,
+    // y: 350,
+    // w: 250,
+    // h: 250,
     data: cleanData,
     yValue: "VALUE",
     xValue: "Year",
     chartWidth: 300,
     chartHeight: 280,
-    xPos: 170,
+    xPos: 100,
     yPos: 400,
     axisLineColour: "#d9d9d9",
     barWidth: 15,
@@ -47,9 +46,42 @@ function setup() {
     labelColour: "#d17c4b",
     labelRotation: 45,
     barColour: "#cf291d",
+
   };
 
+  let barChart02 = {
+    // x: 70,
+    // y: 350,
+    // w: 250,
+    // h: 250,
+    data: cleanData,
+    yValue: "VALUE",
+    xValue: "Year",
+    chartWidth: 300,
+    chartHeight: 280,
+    xPos: 600,
+    yPos: 400,
+    axisLineColour: "#d9d9d9",
+    barWidth: 15,
+    tickColour: "#d9d9d9",
+    tickStrokeWeight: 1,
+    tickStrokeLength: 10,
+    tickPadding: 10,
+    numTicks: 5,
+    tickTextColour: "d9d9d9",
+    tickTextSize: 15,
+    tickDecimals: 0,
+    labelTextSize: 15,
+    labelPadding: 10,
+    labelColour: "#d17c4b",
+    labelRotation: 45,
+    barColour: "#cf291d",
+
+  };
+
+
   barCharts.push(new BarChart(barChart01));
+  barCharts.push(new BarChart(barChart02));
 }
 
 function draw() {

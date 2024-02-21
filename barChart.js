@@ -36,7 +36,6 @@ class BarChart {
     line(0, 0, this.chartWidth, 0);
 
     let gap = (this.chartWidth - this.data.length * this.barWidth) / (this.data.length + 1);
-    // let maxValue = max(this.data.map((x) => x.Total))
     let maxValue = max(this.data.map((d) => d[this.yValue]));
     let lables = this.data.map((d) => d[this.xValue]);
     let scale = this.chartHeight / max(this.data.map((d) => d[this.yValue]));
@@ -69,7 +68,6 @@ class BarChart {
 
     //This draws the vertical elements
     let tickGap = this.chartHeight / 5;
-    let tickValue = max(this.data.map((d) => d[this.yValue])) / 5;
     for (let i = 0; i <= this.numTicks; i++) {
       stroke(this.tickColour);
       strokeWeight(this.tickStrokeWeight);
