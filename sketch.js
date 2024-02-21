@@ -46,6 +46,7 @@ function setup() {
     labelColour: "#d17c4b",
     labelRotation: 45,
     barColour: "#cf291d",
+ 
 
   };
 
@@ -57,7 +58,7 @@ function setup() {
     data: cleanData,
     yValue: "Total",
     xValue: "Year",
-    // yValues:,
+    yValues: ['Male', 'Female'],
     chartWidth: 300,
     chartHeight: 280,
     xPos: 600,
@@ -77,6 +78,7 @@ function setup() {
     labelColour: "#d17c4b",
     labelRotation: 45,
     barColour: "#cf291d",
+    barColours: ["#3366cc", "#dc3912"],
 
   };
 

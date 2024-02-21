@@ -6,6 +6,7 @@ class BarChart {
     this.h = obj.h;
     this.data = obj.data;
     this.yValue = obj.yValue;
+    this.yValues = obj.yValues;
     this.xValue = obj.xValue;
     this.chartWidth = obj.chartWidth;
     this.chartHeight = obj.chartHeight;
@@ -18,6 +19,7 @@ class BarChart {
     this.labelRotation = obj.labelRotation;
     this.barWidth = obj.barWidth;
     this.barColour = obj.barColour;
+    this.barColours = obj.barColours;
     this.tickColour = obj.tickColour;
     this.tickStrokeWeight = obj.tickStrokeWeight;
     this.tickStrokeLength = obj.tickStrokeLength;
@@ -87,4 +89,7 @@ class BarChart {
 
     pop();
   }
+
+
 }
+
