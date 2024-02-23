@@ -18,6 +18,15 @@ function setup() {
     cleanData.push(data.rows[i].obj);
   }
 
+  let stackedData = [];
+for (let i = 0; i < cleanData.length; i++) {
+    let yearData = cleanData[i];
+    stackedData.push({
+        Year: yearData.Year,
+        Male: parseInt(yearData.Male),
+        Female: parseInt(yearData.Female)
+    });
+}
 
   let barChart01 = {
     // x: 70,
@@ -56,7 +65,6 @@ function setup() {
     // w: 250,
     // h: 250,
     data: cleanData,
-    yValue: "Total",
     xValue: "Year",
     yValues: ['Male', 'Female'],
     chartWidth: 300,
