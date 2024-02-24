@@ -27,7 +27,17 @@ class BarChart {
     this.numTicks = obj.numTicks;
     this.tickTextColour = obj.tickTextColour;
     this.tickTextSize = obj.tickTextSize;
-    this.tickDecimals = obj.tickDecimals
+    this.chartType = obj.chartType; // Add new property for chart type
+  }
+
+  drawLabels() {
+    push();
+    fill(this.labelColour);
+    textSize(this.labelTextSize);
+    textAlign(CENTER, CENTER);
+    text(this.xValue, this.xPos + this.chartWidth / 2, this.yPos + this.chartHeight + this.labelPadding);
+    text(this.yValue, this.xPos - this.labelPadding, this.yPos + this.chartHeight / 2);
+    pop();
   }
 
   render() {
@@ -36,23 +46,35 @@ class BarChart {
     stroke(this.axisLineColour);
     line(0, 0, 0, -this.chartHeight);
     line(0, 0, this.chartWidth, 0);
-
+    
     let gap = (this.chartWidth - this.data.length * this.barWidth) / (this.data.length + 1);
-    let maxValue = max(this.data.map((d) => d[this.yValue]));
-    let lables = this.data.map((d) => d[this.xValue]);
-    let scale = this.chartHeight / max(this.data.map((d) => d[this.yValue]));
-    console.log(scale);
+    let maxValue;
+    if (this.chartType === 'stacked') {
+      maxValue = max(this.data.map((d) => this.yValues.reduce((sum, yValue) => sum + d[yValue], 0)));
+    } else {
+      maxValue = max(this.data.map((d) => d[this.yValue]));
+    }
+    let labels = this.data.map((d) => d[this.xValue]);
+    let scale = this.chartHeight / maxValue;
 
-    //This loop draws the horizontal elements, bars and lables
     push();
     translate(gap, 0);
     for (let i = 0; i < this.data.length; i++) {
-      //This draws the bars
-      fill("#cf291d");
-      noStroke();
-      rect(0, 0, this.barWidth, -this.data[i][this.yValue] * scale);
+      if (this.chartType === 'stacked') {
+        let y0 = 0;
+        for (let yValue of this.yValues) {
+          fill(this.barColours[this.yValues.indexOf(yValue)]);
+          noStroke();
+          let barHeight = this.data[i][yValue] * scale;
+          rect(0, -y0, this.barWidth, -barHeight);
+          y0 += barHeight;
+        }
+      } else {
+        fill(this.barColour);
+        noStroke();
+        rect(0, 0, this.barWidth, -this.data[i][this.yValue] * scale);
+      }
 
-      //This draws the lables
       fill(this.labelColour);
       noStroke();
       textSize(this.labelTextSize);
@@ -60,35 +82,26 @@ class BarChart {
       push();
       translate(this.barWidth / 2, this.labelPadding);
       rotate(this.labelRotation);
-
-      text(lables[i], 0, 0);
+      text(labels[i], 0, 0);
       pop();
 
       translate(gap + this.barWidth, 0);
     }
     pop();
 
-    //This draws the vertical elements
-    let tickGap = this.chartHeight / 5;
+    let tickGap = this.chartHeight / this.numTicks;
     for (let i = 0; i <= this.numTicks; i++) {
       stroke(this.tickColour);
       strokeWeight(this.tickStrokeWeight);
       line(0, -i * tickGap, -this.tickStrokeLength, -i * tickGap);
 
-      // Draw tick labels
       fill(this.tickTextColour);
       textSize(this.tickTextSize);
       textAlign(RIGHT, CENTER);
       let value = (maxValue / this.numTicks) * i;
-      
-      text( value.toFixed(this.tickDecimals), -this.tickPadding - this.tickStrokeLength, -i * tickGap
-    );
+      text(value.toFixed(this.tickDecimals), -this.tickPadding - this.tickStrokeLength, -i * tickGap);
     }
-    
- 
 
     pop();
   }
-
-
 }
