@@ -98,8 +98,8 @@ let barChart03 = {
   chartType: '100% stacked',
   data: cleanData.map(row => ({
     Year: row.Year,
-    Male: row.Male / row.Total * 100,
-    Female: row.Female / row.Total * 100,
+    Male: parseInt(row.Male) / parseInt(row.Total) * 100,
+    Female: parseInt(row.Female) / parseInt(row.Total) * 100,
     Total: 100
   })),
   xValue: "Year",
