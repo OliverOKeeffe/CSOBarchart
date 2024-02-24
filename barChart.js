@@ -30,27 +30,23 @@ class BarChart {
     this.chartType = obj.chartType; // Add new property for chart type
   }
 
-  drawLabels() {
-    push();
-    fill(this.labelColour);
-    textSize(this.labelTextSize);
-    textAlign(CENTER, CENTER);
-    text(this.xValue, this.xPos + this.chartWidth / 2, this.yPos + this.chartHeight + this.labelPadding);
-    text(this.yValue, this.xPos - this.labelPadding, this.yPos + this.chartHeight / 2);
-    pop();
-  }
-
   render() {
     push();
     translate(this.xPos, this.yPos);
     stroke(this.axisLineColour);
     line(0, 0, 0, -this.chartHeight);
     line(0, 0, this.chartWidth, 0);
-    
-    let gap = (this.chartWidth - this.data.length * this.barWidth) / (this.data.length + 1);
+
+    let gap =
+      (this.chartWidth - this.data.length * this.barWidth) /
+      (this.data.length + 1);
     let maxValue;
-    if (this.chartType === 'stacked') {
-      maxValue = max(this.data.map((d) => this.yValues.reduce((sum, yValue) => sum + d[yValue], 0)));
+    if (this.chartType === "stacked") {
+      maxValue = max(
+        this.data.map((d) =>
+          this.yValues.reduce((sum, yValue) => sum + d[yValue], 0)
+        )
+      );
     } else {
       maxValue = max(this.data.map((d) => d[this.yValue]));
     }
@@ -60,12 +56,22 @@ class BarChart {
     push();
     translate(gap, 0);
     for (let i = 0; i < this.data.length; i++) {
-      if (this.chartType === 'stacked') {
+      if (this.chartType === "stacked") {
         let y0 = 0;
         for (let yValue of this.yValues) {
           fill(this.barColours[this.yValues.indexOf(yValue)]);
           noStroke();
           let barHeight = this.data[i][yValue] * scale;
+          rect(0, -y0, this.barWidth, -barHeight);
+          y0 += barHeight;
+        }
+      } else if (this.chartType === "100% stacked") {
+        let y0 = 0;
+        for (let yValue of this.yValues) {
+          fill(this.barColours[this.yValues.indexOf(yValue)]);
+          noStroke();
+          let percentage = this.data[i][yValue];
+          let barHeight = (percentage * this.chartHeight) / 100; // Calculate height based on percentage
           rect(0, -y0, this.barWidth, -barHeight);
           y0 += barHeight;
         }
@@ -99,7 +105,11 @@ class BarChart {
       textSize(this.tickTextSize);
       textAlign(RIGHT, CENTER);
       let value = (maxValue / this.numTicks) * i;
-      text(value.toFixed(this.tickDecimals), -this.tickPadding - this.tickStrokeLength, -i * tickGap);
+      text(
+        value.toFixed(this.tickDecimals),
+        -this.tickPadding - this.tickStrokeLength,
+        -i * tickGap
+      );
     }
 
     pop();

@@ -95,7 +95,7 @@ let barChart03 = {
   // y: 350,
   // w: 250,
   // h: 250,
-  chartType: 'stacked',
+  chartType: '100% stacked',
   data: cleanData.map(row => ({
     Year: row.Year,
     Male: row.Male / row.Total * 100,
@@ -126,10 +126,42 @@ let barChart03 = {
   barColours: ["#3366cc", "#f520d5"],
 };
 
+let barChart04 = {
+  // x: 70,
+  // y: 350,
+  // w: 250,
+  // h: 250,
+  data: cleanData,
+  yValue: "Total",
+  xValue: "Year",
+  chartWidth: 300,
+  chartHeight: 280,
+  xPos: 600,
+  yPos: 800,
+  axisLineColour: "#d9d9d9",
+  barWidth: 20,
+  tickColour: "#d9d9d9",
+  tickStrokeWeight: 1,
+  tickStrokeLength: 10,
+  tickPadding: 10,
+  numTicks: 5,
+  tickTextColour: "d9d9d9",
+  tickTextSize: 15,
+  tickDecimals: 0,
+  labelTextSize: 15,
+  labelPadding: 10,
+  labelColour: "#d17c4b",
+  labelRotation: 45,
+  barColour: "#cf291d",
+
+
+};
+
 
   barCharts.push(new BarChart(barChart01));
   barCharts.push(new BarChart(barChart02));
   barCharts.push(new BarChart(barChart03));
+  barCharts.push(new BarChart(barChart04));
 }
 
 function draw() {
