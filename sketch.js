@@ -131,6 +131,7 @@ let barChart04 = {
   // y: 350,
   // w: 250,
   // h: 250,
+  chartType: 'Horizontal',
   data: cleanData,
   yValue: "Total",
   xValue: "Year",

@@ -37,6 +37,8 @@ class BarChart {
     line(0, 0, 0, -this.chartHeight);
     line(0, 0, this.chartWidth, 0);
 
+    
+
     let gap =
       (this.chartWidth - this.data.length * this.barWidth) /
       (this.data.length + 1);
@@ -111,7 +113,6 @@ class BarChart {
         -i * tickGap
       );
     }
-
     pop();
   }
 }
