@@ -9,7 +9,7 @@ function preload() {
 
 function setup() {
   background(50);
-  createCanvas(1000, 1000);
+  createCanvas(1500, 1500);
 
   noLoop();
 
@@ -96,13 +96,33 @@ let barChart03 = {
   // w: 250,
   // h: 250,
   chartType: '100% stacked',
-  data: cleanData.map(row => ({
-    Year: row.Year,
-    Male: parseInt(row.Male) / parseInt(row.Total) * 100,
-    Female: parseInt(row.Female) / parseInt(row.Total) * 100,
-    Total: 100
-  })),
+  data: cleanData.map(row => {
+    let malePercentage = 0;
+    let femalePercentage = 0;
+    let total = Number(row.Total);
+    let male = Number(row.Male);
+    let female = Number(row.Female);
+
+    if (Number.isFinite(total) && total !== 0) {
+      if (Number.isFinite(male) && Number.isFinite(female)) {
+        malePercentage = (male / total) * 100;
+        femalePercentage = (female / total) * 100;
+      } else {
+        console.error('Invalid data in row:', row);
+      }
+    } else {
+      console.error('Total is zero or not a number in row:', row);
+    }
+
+    return {
+      Year: row.Year,
+      Male: malePercentage,
+      Female: femalePercentage,
+      Total: 100
+    };
+  }),
   xValue: "Year",
+  yValue: "Total",
   yValues: ['Male', 'Female'],
   chartWidth: 300,
   chartHeight: 280,
@@ -131,7 +151,7 @@ let barChart04 = {
   // y: 350,
   // w: 250,
   // h: 250,
-  chartType: 'Horizontal',
+  chartType: 'horizontal',
   data: cleanData,
   yValue: "Total",
   xValue: "Year",

@@ -33,9 +33,17 @@ class BarChart {
   render() {
     push();
     translate(this.xPos, this.yPos);
+   if (this.chartType === "horizontal") {
+    // Draw horizontal axis
+    stroke(this.axisLineColour);
+    line(0, 0, this.chartHeight, 0);
+    line(0, 0, 0, this.chartWidth);
+  } else {
+    // Draw vertical axis
     stroke(this.axisLineColour);
     line(0, 0, 0, -this.chartHeight);
     line(0, 0, this.chartWidth, 0);
+  }
 
     
 
@@ -82,6 +90,7 @@ class BarChart {
         noStroke();
         rect(0, 0, this.barWidth, -this.data[i][this.yValue] * scale);
       }
+ 
 
       fill(this.labelColour);
       noStroke();
