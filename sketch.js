@@ -54,7 +54,7 @@ for (let i = 0; i < cleanData.length; i++) {
     labelPadding: 10,
     labelColour: "#d17c4b",
     labelRotation: 45,
-    barColour: "#cf291d",
+    barColour: "#fa0202",
  
 
   };
@@ -96,31 +96,7 @@ let barChart03 = {
   // w: 250,
   // h: 250,
   chartType: '100% stacked',
-  data: cleanData.map(row => {
-    let malePercentage = 0;
-    let femalePercentage = 0;
-    let total = Number(row.Total);
-    let male = Number(row.Male);
-    let female = Number(row.Female);
-
-    if (Number.isFinite(total) && total !== 0) {
-      if (Number.isFinite(male) && Number.isFinite(female)) {
-        malePercentage = (male / total) * 100;
-        femalePercentage = (female / total) * 100;
-      } else {
-        console.error('Invalid data in row:', row);
-      }
-    } else {
-      console.error('Total is zero or not a number in row:', row);
-    }
-
-    return {
-      Year: row.Year,
-      Male: malePercentage,
-      Female: femalePercentage,
-      Total: 100
-    };
-  }),
+  data: cleanData,
   xValue: "Year",
   yValue: "Total",
   yValues: ['Male', 'Female'],

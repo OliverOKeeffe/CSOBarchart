@@ -1,5 +1,7 @@
 class BarChart {
   constructor(obj) {
+    // All these properties are initialized from the object passed to the constructor.
+    // They represent various parameters for the bar chart, such as its position, size, data, and visual properties.
     this.x = obj.x;
     this.y = obj.y;
     this.w = obj.w;
@@ -28,6 +30,42 @@ class BarChart {
     this.tickTextColour = obj.tickTextColour;
     this.tickTextSize = obj.tickTextSize;
     this.chartType = obj.chartType; // Add new property for chart type
+
+    // If the chart type is '100% stacked', process the data
+    if (this.chartType === '100% stacked') {
+      this.data = this.processData(this.data);
+    }
+  }
+
+  processData(data) {
+    // This method is used to process the data for a '100% stacked' bar chart.
+    // It calculates the percentage of male and female (assuming these are the categories in the data) for each row.
+    // The processed data is an array of objects, each representing a year with the calculated percentages and a total of 100.
+    return data.map(row => {
+      let malePercentage = 0;
+      let femalePercentage = 0;
+      let total = Number(row.Total);
+      let male = Number(row.Male);
+      let female = Number(row.Female);
+
+      if (Number.isFinite(total) && total !== 0) {
+        if (Number.isFinite(male) && Number.isFinite(female)) {
+          malePercentage = (male / total) * 100;
+          femalePercentage = (female / total) * 100;
+        } else {
+          console.error('Invalid data in row:', row);
+        }
+      } else {
+        console.error('Total is zero or not a number in row:', row);
+      }
+
+      return {
+        Year: row.Year,
+        Male: malePercentage,
+        Female: femalePercentage,
+        Total: 100
+      };
+    });
   }
 
   render() {
@@ -44,8 +82,6 @@ class BarChart {
       line(0, 0, 0, -this.chartHeight); // Vertical line
       line(0, 0, this.chartWidth, 0); // Horizontal line
     }
-
-    
 
     let gap =
       (this.chartWidth - this.data.length * this.barWidth) /
@@ -104,6 +140,7 @@ class BarChart {
 
       translate(gap + this.barWidth, 0);
     }
+    
     pop();
 
     let tickGap = this.chartHeight / this.numTicks;
