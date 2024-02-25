@@ -4,8 +4,10 @@ let cleanData = [];
 let numRows;
 
 function preload() {
-  data = loadTable("data/MedianDispasableincome.csv", "csv", "header");
+  data = loadTable("data/Reoffending.csv", "csv", "header");
 }
+// MedianDispasableincome
+// Reoffending
 
 function setup() {
   background(50);
@@ -50,6 +52,7 @@ for (let i = 0; i < cleanData.length; i++) {
     tickTextColour: "d9d9d9",
     tickTextSize: 15,
     tickDecimals: 0,
+    chartTitle: "Statistic",
     labelTextSize: 15,
     labelPadding: 10,
     labelColour: "#d17c4b",
@@ -127,7 +130,7 @@ let barChart04 = {
   // y: 350,
   // w: 250,
   // h: 250,
-  chartType: 'horizontal',
+  chartType: 'line',
   data: cleanData,
   yValue: "Total",
   xValue: "Year",
@@ -150,6 +153,8 @@ let barChart04 = {
   labelColour: "#d17c4b",
   labelRotation: 45,
   barColour: "#cf291d",
+  lineColour: "#cf291d",
+  lineThickness: 1,
 
 
 };

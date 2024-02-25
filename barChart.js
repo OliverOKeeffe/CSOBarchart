@@ -29,6 +29,8 @@ class BarChart {
     this.numTicks = obj.numTicks;
     this.tickTextColour = obj.tickTextColour;
     this.tickTextSize = obj.tickTextSize;
+    this.lineColour = obj.lineColour;
+    this.lineThickness = obj.lineThickness;
     this.chartType = obj.chartType; // Add new property for chart type
 
     // If the chart type is '100% stacked', process the data
@@ -82,7 +84,7 @@ class BarChart {
       line(0, 0, 0, -this.chartHeight); // Vertical line
       line(0, 0, this.chartWidth, 0); // Horizontal line
     }
-
+  
     let gap =
       (this.chartWidth - this.data.length * this.barWidth) /
       (this.data.length + 1);
@@ -98,36 +100,37 @@ class BarChart {
     }
     let labels = this.data.map((d) => d[this.xValue]);
     let scale = this.chartHeight / maxValue;
-
+  
     push();
     translate(gap, 0);
     for (let i = 0; i < this.data.length; i++) {
-      if (this.chartType === "stacked") {
-        let y0 = 0;
-        for (let yValue of this.yValues) {
-          fill(this.barColours[this.yValues.indexOf(yValue)]);
-          stroke(this.tickColour);
-          let barHeight = this.data[i][yValue] * scale;
-          rect(0, -y0, this.barWidth, -barHeight);
-          y0 += barHeight;
+      if (this.chartType !== 'line') {
+        if (this.chartType === "stacked") {
+          let y0 = 0;
+          for (let yValue of this.yValues) {
+            fill(this.barColours[this.yValues.indexOf(yValue)]);
+            stroke(this.tickColour);
+            let barHeight = this.data[i][yValue] * scale;
+            rect(0, -y0, this.barWidth, -barHeight);
+            y0 += barHeight;
+          }
+        } else if (this.chartType === "100% stacked") {
+          let y0 = 0;
+          for (let yValue of this.yValues) {
+            fill(this.barColours[this.yValues.indexOf(yValue)]);
+            stroke(this.tickColour);
+            let percentage = this.data[i][yValue];
+            let barHeight = (percentage * this.chartHeight) / 100; // Calculate height based on percentage
+            rect(0, -y0, this.barWidth, -barHeight);
+            y0 += barHeight;
+          }
+        } else {
+          fill(this.barColour);
+          noStroke();
+          rect(0, 0, this.barWidth, -this.data[i][this.yValue] * scale);
         }
-      } else if (this.chartType === "100% stacked") {
-        let y0 = 0;
-        for (let yValue of this.yValues) {
-          fill(this.barColours[this.yValues.indexOf(yValue)]);
-          stroke(this.tickColour);
-          let percentage = this.data[i][yValue];
-          let barHeight = (percentage * this.chartHeight) / 100; // Calculate height based on percentage
-          rect(0, -y0, this.barWidth, -barHeight);
-          y0 += barHeight;
-        }
-      } else {
-        fill(this.barColour);
-        noStroke();
-        rect(0, 0, this.barWidth, -this.data[i][this.yValue] * scale);
       }
- 
-
+  
       fill(this.labelColour);
       noStroke();
       textSize(this.labelTextSize);
@@ -137,18 +140,18 @@ class BarChart {
       rotate(this.labelRotation);
       text(labels[i], 0, 0);
       pop();
-
+  
       translate(gap + this.barWidth, 0);
     }
     
     pop();
-
+  
     let tickGap = this.chartHeight / this.numTicks;
     for (let i = 0; i <= this.numTicks; i++) {
       stroke(this.tickColour);
       strokeWeight(this.tickStrokeWeight);
       line(0, -i * tickGap, -this.tickStrokeLength, -i * tickGap);
-
+  
       fill(this.tickTextColour);
       textSize(this.tickTextSize);
       textAlign(RIGHT, CENTER);
@@ -159,6 +162,21 @@ class BarChart {
         -i * tickGap
       );
     }
+  
+    // Draw line chart
+    if (this.chartType === 'line') {
+      beginShape();
+      noFill();
+      strokeWeight(this.lineThickness);
+      stroke(this.lineColour);
+      for (let i = 0; i < this.data.length; i++) {
+        let x = i * this.chartWidth / (this.data.length - 1);
+        let y = this.data[i][this.yValue] * scale;
+        vertex(x, -y);
+      }
+      endShape();
+    }
+  
     pop();
   }
 }
