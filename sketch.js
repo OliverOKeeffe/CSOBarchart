@@ -4,7 +4,7 @@ let cleanData = [];
 let numRows;
 
 function preload() {
-  data = loadTable("data/Reoffending.csv", "csv", "header");
+  data = loadTable("data/MedianDispasableincome.csv", "csv", "header");
 }
 
 function setup() {

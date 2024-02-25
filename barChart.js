@@ -33,17 +33,17 @@ class BarChart {
   render() {
     push();
     translate(this.xPos, this.yPos);
-   if (this.chartType === "horizontal") {
-    // Draw horizontal axis
-    stroke(this.axisLineColour);
-    line(0, 0, this.chartHeight, 0);
-    line(0, 0, 0, this.chartWidth);
-  } else {
-    // Draw vertical axis
-    stroke(this.axisLineColour);
-    line(0, 0, 0, -this.chartHeight);
-    line(0, 0, this.chartWidth, 0);
-  }
+    if (this.chartType === "horizontal") {
+      // Draw horizontal axis
+      stroke(this.axisLineColour);
+      line(0, 0, 0, -this.chartHeight); // Vertical line
+      line(0, 0, this.chartWidth, 0);  // Vertical line
+    } else {
+      // Draw vertical axis
+      stroke(this.axisLineColour);
+      line(0, 0, 0, -this.chartHeight); // Vertical line
+      line(0, 0, this.chartWidth, 0); // Horizontal line
+    }
 
     
 
@@ -70,7 +70,7 @@ class BarChart {
         let y0 = 0;
         for (let yValue of this.yValues) {
           fill(this.barColours[this.yValues.indexOf(yValue)]);
-          noStroke();
+          stroke(this.tickColour);
           let barHeight = this.data[i][yValue] * scale;
           rect(0, -y0, this.barWidth, -barHeight);
           y0 += barHeight;
@@ -79,7 +79,7 @@ class BarChart {
         let y0 = 0;
         for (let yValue of this.yValues) {
           fill(this.barColours[this.yValues.indexOf(yValue)]);
-          noStroke();
+          stroke(this.tickColour);
           let percentage = this.data[i][yValue];
           let barHeight = (percentage * this.chartHeight) / 100; // Calculate height based on percentage
           rect(0, -y0, this.barWidth, -barHeight);
