@@ -152,8 +152,7 @@ let barChart04 = {
   labelPadding: 10,
   labelColour: "#d17c4b",
   labelRotation: 45,
-  barColour: "#cf291d",
-  lineColour: "#cf291d",
+  lineColour: "#34eb9e",
   lineThickness: 1,
 
 
