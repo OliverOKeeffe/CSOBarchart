@@ -14,7 +14,11 @@ class BarChart {
     this.chartHeight = obj.chartHeight;
     this.xPos = obj.xPos;
     this.yPos = obj.yPos;
+    this.yLabel = obj.yLabel;
+    this.xLabel = obj.xLabel;
     this.axisLineColour = obj.axisLineColour;
+    this.chartTitle = obj.chartTitle;
+    this.chartTitleColour = obj.chartTitleColour;
     this.labelTextSize = obj.labelTextSize;
     this.labelPadding = obj.labelPadding;
     this.labelColour = obj.labelColour;
@@ -41,7 +45,7 @@ class BarChart {
 
   processData(data) {
     // This method is used to process the data for a '100% stacked' bar chart.
-    // It calculates the percentage of male and female (assuming these are the categories in the data) for each row.
+    // It calculates the percentage of male and female for each row.
     // The processed data is an array of objects, each representing a year with the calculated percentages and a total of 100.
     return data.map(row => {
       let malePercentage = 0;
@@ -54,12 +58,8 @@ class BarChart {
         if (Number.isFinite(male) && Number.isFinite(female)) {
           malePercentage = (male / total) * 100;
           femalePercentage = (female / total) * 100;
-        } else {
-          console.error('Invalid data in row:', row);
-        }
-      } else {
-        console.error('Total is zero or not a number in row:', row);
-      }
+        } 
+      } 
 
       return {
         Year: row.Year,
@@ -73,6 +73,31 @@ class BarChart {
   render() {
     push();
     translate(this.xPos, this.yPos);
+
+      // Draw title
+      textSize(24); // Set the text size
+      textAlign(CENTER, CENTER); // Center the text
+      fill(this.chartTitleColour); // Set the text color
+      text(this.chartTitle, this.chartWidth / 2, -this.chartHeight - 50); // Draw the title 50 pixels above the chart    
+      
+// Draw x label
+if (this.xLabel) {
+  textSize(16); // Set the text size
+  textAlign(CENTER, CENTER); // Center the text
+  text(this.xLabel, this.chartWidth / 2, this.chartHeight + 20 - 220); // Draw the x label
+}
+
+// Draw y label
+if (this.yLabel) {
+  textSize(this.labelTextSize); // Set the text size
+  textAlign(CENTER, CENTER); // Center the text
+  push();
+  translate(-50 - 30, -this.chartHeight / 2 - 10); // Move the y label up
+  rotate(-HALF_PI); // Rotate the text by 90 degrees
+  text(this.yLabel, 0, 0); // Draw the y label
+  pop();
+}
+      
     if (this.chartType === "horizontal") {
       // Draw horizontal axis
       stroke(this.axisLineColour);
@@ -84,11 +109,10 @@ class BarChart {
       line(0, 0, 0, -this.chartHeight); // Vertical line
       line(0, 0, this.chartWidth, 0); // Horizontal line
     }
-  
-    let gap =
-      (this.chartWidth - this.data.length * this.barWidth) /
-      (this.data.length + 1);
+
+    let gap = (this.chartWidth - this.data.length * this.barWidth) / (this.data.length + 1);
     let maxValue;
+
     if (this.chartType === "stacked") {
       maxValue = max(
         this.data.map((d) =>
@@ -100,7 +124,7 @@ class BarChart {
     }
     let labels = this.data.map((d) => d[this.xValue]);
     let scale = this.chartHeight / maxValue;
-  
+
     push();
     translate(gap, 0);
     for (let i = 0; i < this.data.length; i++) {
@@ -130,7 +154,7 @@ class BarChart {
           rect(0, 0, this.barWidth, -this.data[i][this.yValue] * scale);
         }
       }
-  
+
       fill(this.labelColour);
       noStroke();
       textSize(this.labelTextSize);
@@ -140,18 +164,18 @@ class BarChart {
       rotate(this.labelRotation);
       text(labels[i], 0, 0);
       pop();
-  
+
       translate(gap + this.barWidth, 0);
     }
-    
+
     pop();
-  
+
     let tickGap = this.chartHeight / this.numTicks;
     for (let i = 0; i <= this.numTicks; i++) {
       stroke(this.tickColour);
       strokeWeight(this.tickStrokeWeight);
       line(0, -i * tickGap, -this.tickStrokeLength, -i * tickGap);
-  
+
       fill(this.tickTextColour);
       textSize(this.tickTextSize);
       textAlign(RIGHT, CENTER);
@@ -162,7 +186,7 @@ class BarChart {
         -i * tickGap
       );
     }
-  
+
     // Draw line chart
     if (this.chartType === 'line') {
       beginShape();
@@ -176,7 +200,7 @@ class BarChart {
       }
       endShape();
     }
-  
+
     pop();
   }
 }
