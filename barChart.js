@@ -110,6 +110,8 @@ if (this.yLabel) {
       line(0, 0, this.chartWidth, 0); // Horizontal line
     }
 
+    
+
     let gap = (this.chartWidth - this.data.length * this.barWidth) / (this.data.length + 1);
     let maxValue;
 

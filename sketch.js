@@ -11,7 +11,7 @@ function preload() {
 
 function setup() {
   background(50);
-  createCanvas(1500, 1500);
+  createCanvas(1500, 1200);
 
   noLoop();
 
@@ -56,7 +56,7 @@ for (let i = 0; i < cleanData.length; i++) {
     chartTitleColour: "#ffffff",
     xLabel: 'Year',
     yLabel: 'Total',
-    labelTextSize: 15,
+    labelTextSize: 18,
     labelPadding: 10,
     labelColour: "#d17c4b",
     labelRotation: 45,
@@ -92,7 +92,7 @@ for (let i = 0; i < cleanData.length; i++) {
     tickDecimals: 0,
     xLabel: 'Year',
     yLabel: 'Total',
-    labelTextSize: 15,
+    labelTextSize: 18,
     labelPadding: 10,
     labelColour: "#d17c4b",
     labelRotation: 45,
@@ -128,7 +128,7 @@ let barChart03 = {
   tickDecimals: 0,
   xLabel: 'Year',
   yLabel: 'Total',
-  labelTextSize: 15,
+  labelTextSize: 18,
   labelPadding: 10,
   labelColour: "#d17c4b",
   labelRotation: 45,
@@ -136,7 +136,7 @@ let barChart03 = {
   barColours: ["#3366cc", "#f520d5"],
 };
 
-let barChart04 = {
+let lineChart = {
   // x: 70,
   // y: 350,
   // w: 250,
@@ -163,7 +163,7 @@ let barChart04 = {
   tickDecimals: 0,
   xLabel: 'Year',
   yLabel: 'Total',
-  labelTextSize: 15,
+  labelTextSize: 18,
   labelPadding: 10,
   labelColour: "#d17c4b",
   labelRotation: 45,
@@ -177,7 +177,7 @@ let barChart04 = {
   barCharts.push(new BarChart(barChart01));
   barCharts.push(new BarChart(barChart02));
   barCharts.push(new BarChart(barChart03));
-  barCharts.push(new BarChart(barChart04));
+  barCharts.push(new BarChart(lineChart));
 }
 
 function draw() {
