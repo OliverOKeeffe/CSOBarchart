@@ -20,6 +20,7 @@ function setup() {
     cleanData.push(data.rows[i].obj);
   }
 
+// To make male and female numbers, so they can be used for the stakced charts
   let stackedData = [];
 for (let i = 0; i < cleanData.length; i++) {
     let yearData = cleanData[i];
