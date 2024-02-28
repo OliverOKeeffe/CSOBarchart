@@ -52,15 +52,15 @@ for (let i = 0; i < cleanData.length; i++) {
     tickTextColour: "d9d9d9",
     tickTextSize: 15,
     tickDecimals: 0,
-    chartTitle: "Median Equivalised Real Disposable Income",
+    chartTitle: "Re-offended within 3 years",
     chartTitleColour: "#ffffff",
     xLabel: 'Year',
     yLabel: 'Total',
     labelTextSize: 18,
     labelPadding: 10,
-    labelColour: "#d17c4b",
+    labelColour: "#ffffff",
     labelRotation: 45,
-    barColour: "#fa0202",
+    barColour: "#1ce64b",
  
 
   };
@@ -72,7 +72,7 @@ for (let i = 0; i < cleanData.length; i++) {
     // h: 250,
     chartType: 'stacked',
     data: stackedData,
-    chartTitle: "Median Equivalised Real Disposable Income",
+    chartTitle: "Re-offended within 3 years",
     chartTitleColour: "#ffffff",
     xValue: "Year",
     yValues: ['Male', 'Female'],
@@ -94,10 +94,10 @@ for (let i = 0; i < cleanData.length; i++) {
     yLabel: 'Total',
     labelTextSize: 18,
     labelPadding: 10,
-    labelColour: "#d17c4b",
+    labelColour: "#ffffff",
     labelRotation: 45,
     barColour: "#cf291d",
-    barColours: ["#3366cc", "#f520d5"],
+    barColours: ["#3366cc", "#f086ec"],
 };
 
 let barChart03 = {
@@ -110,7 +110,7 @@ let barChart03 = {
   xValue: "Year",
   yValue: "Total",
   yValues: ['Male', 'Female'],
-  chartTitle: "Median Equivalised Real Disposable Income",
+  chartTitle: "Re-offended within 3 years",
   chartTitleColour: "#ffffff",
   chartWidth: 300,
   chartHeight: 280,
@@ -130,10 +130,10 @@ let barChart03 = {
   yLabel: 'Total',
   labelTextSize: 18,
   labelPadding: 10,
-  labelColour: "#d17c4b",
+  labelColour: "#ffffff",
   labelRotation: 45,
   barColour: "#cf291d",
-  barColours: ["#3366cc", "#f520d5"],
+  barColours: ["#1625c9", "#db12bd"],
 };
 
 let lineChart = {
@@ -149,7 +149,7 @@ let lineChart = {
   chartHeight: 280,
   xPos: 800,
   yPos: 900,
-  chartTitle: "Median Equivalised Real Disposable Income",
+  chartTitle: "Re-offended within 3 years",
   chartTitleColour: "#ffffff",
   axisLineColour: "#d9d9d9",
   barWidth: 20,
@@ -165,10 +165,10 @@ let lineChart = {
   yLabel: 'Total',
   labelTextSize: 18,
   labelPadding: 10,
-  labelColour: "#d17c4b",
+  labelColour: "ffffff",
   labelRotation: 45,
-  lineColour: "#34eb9e",
-  lineThickness: 1,
+  lineColour: "#faef16",
+  lineThickness: 2,
 
 
 };
@@ -181,6 +181,6 @@ let lineChart = {
 }
 
 function draw() {
-  background(50);
+  background(20);
   barCharts.forEach(bar => bar.render());
 }
